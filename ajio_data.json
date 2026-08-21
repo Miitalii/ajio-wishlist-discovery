@@ -4,7 +4,7 @@
       "id": 1,
       "source": "Play Store",
       "source_type": "app_review",
-      "raw_text": "The app crashes every time I try to open my wishlist. Fix this please.",
+      "raw_text": "The app crashes every time I try to open my wishlist.",
       "theme": "APP_FRICTION",
       "theme_label": "App Experience Friction",
       "journey_stage": "POST_SAVE",
@@ -20,7 +20,7 @@
       "id": 2,
       "source": "Play Store",
       "source_type": "app_review",
-      "raw_text": "Size chart is completely wrong. Ordered M but it fits like S. Very disappointed.",
+      "raw_text": "Size chart is completely wrong. Ordered M but it fits like S.",
       "theme": "FIT_UNCERTAINTY",
       "theme_label": "Fit & Sizing Confidence",
       "journey_stage": "PRE_PURCHASE",
@@ -52,7 +52,7 @@
       "id": 4,
       "source": "Play Store",
       "source_type": "app_review",
-      "raw_text": "Product quality is pathetic. Fabric feels like plastic. Never ordering again.",
+      "raw_text": "Product quality is pathetic. Fabric feels like plastic.",
       "theme": "QUALITY_DOUBT",
       "theme_label": "Product Quality Mismatch",
       "journey_stage": "POST_DELIVERY",
@@ -68,7 +68,7 @@
       "id": 5,
       "source": "Play Store",
       "source_type": "app_review",
-      "raw_text": "Return pickup took 10 days. Customer care does not respond. Worst experience.",
+      "raw_text": "Return pickup took 10 days. Customer care does not respond.",
       "theme": "RETURN_NIGHTMARE",
       "theme_label": "Return & Refund Friction",
       "journey_stage": "POST_DELIVERY",
@@ -116,7 +116,7 @@
       "id": 8,
       "source": "Play Store",
       "source_type": "app_review",
-      "raw_text": "The app is so slow and full of ads. Can not even scroll my wishlist properly.",
+      "raw_text": "The app is so slow and full of ads. Cannot even scroll my wishlist properly.",
       "theme": "APP_FRICTION",
       "theme_label": "App Experience Friction",
       "journey_stage": "POST_SAVE",
@@ -468,7 +468,7 @@
       "id": 30,
       "source": "Play Store",
       "source_type": "app_review",
-      "raw_text": "AJIO private labels have zero reviews. Can not judge quality before buying.",
+      "raw_text": "AJIO private labels have zero reviews. Cannot judge quality before buying.",
       "theme": "INFO_GAP",
       "theme_label": "Missing Social Proof & Reviews",
       "journey_stage": "PRE_PURCHASE",
@@ -516,7 +516,7 @@
       "id": 33,
       "source": "App Store",
       "source_type": "app_review",
-      "raw_text": "Where are the ratings? I can not see star ratings on most products.",
+      "raw_text": "Where are the ratings? I cannot see star ratings on most products.",
       "theme": "INFO_GAP",
       "theme_label": "Missing Social Proof & Reviews",
       "journey_stage": "PRE_PURCHASE",
@@ -628,7 +628,7 @@
       "id": 40,
       "source": "App Store",
       "source_type": "app_review",
-      "raw_text": "No Q&A section on product pages. Can not ask about fabric details.",
+      "raw_text": "No Q&A section on product pages. Cannot ask about fabric details.",
       "theme": "INFO_GAP",
       "theme_label": "Missing Social Proof & Reviews",
       "journey_stage": "PRE_PURCHASE",
@@ -932,7 +932,7 @@
       "id": 59,
       "source": "App Store",
       "source_type": "app_review",
-      "raw_text": "Can not sort wishlist by price or discount. Basic feature missing.",
+      "raw_text": "Cannot sort wishlist by price or discount. Basic feature missing.",
       "theme": "APP_FRICTION",
       "theme_label": "App Experience Friction",
       "journey_stage": "POST_SAVE",
@@ -996,7 +996,7 @@
       "id": 63,
       "source": "Reddit",
       "source_type": "social",
-      "raw_text": "Bought a jacket from AJIO wishlist. Material feels like Rs 200 roadside quality. Fooled by photos.",
+      "raw_text": "Bought a jacket from AJIO wishlist. Material feels like Rs 200 roadside quality.",
       "theme": "QUALITY_DOUBT",
       "theme_label": "Product Quality Mismatch",
       "journey_stage": "POST_DELIVERY",
@@ -1076,7 +1076,7 @@
       "id": 68,
       "source": "Reddit",
       "source_type": "social",
-      "raw_text": "The app is so cluttered with banners that I can not even find my wishlist half the time.",
+      "raw_text": "The app is so cluttered with banners that I cannot even find my wishlist half the time.",
       "theme": "APP_FRICTION",
       "theme_label": "App Experience Friction",
       "journey_stage": "POST_SAVE",
@@ -1412,7 +1412,7 @@
       "id": 89,
       "source": "Reddit",
       "source_type": "social",
-      "raw_text": "Can not share wishlist with family. My mom has to screenshot and send me items.",
+      "raw_text": "Cannot share wishlist with family. My mom has to screenshot and send me items.",
       "theme": "APP_FRICTION",
       "theme_label": "App Experience Friction",
       "journey_stage": "POST_SAVE",
@@ -1556,7 +1556,7 @@
       "id": 98,
       "source": "YouTube",
       "source_type": "social",
-      "raw_text": "App is so laggy on my phone. Can not even browse wishlist properly.",
+      "raw_text": "App is so laggy on my phone. Cannot even browse wishlist properly.",
       "theme": "APP_FRICTION",
       "theme_label": "App Experience Friction",
       "journey_stage": "POST_SAVE",
@@ -1604,7 +1604,7 @@
       "id": 101,
       "source": "YouTube",
       "source_type": "social",
-      "raw_text": "I am 5'4 and the dress was too long. Size chart did not mention length.",
+      "raw_text": "I am 5 feet 4 and the dress was too long. Size chart did not mention length.",
       "theme": "FIT_UNCERTAINTY",
       "theme_label": "Fit & Sizing Confidence",
       "journey_stage": "PRE_PURCHASE",
@@ -2260,7 +2260,7 @@
       "conversion_impact": "Indirect — erodes trust for future purchases",
       "solveability": "High",
       "evidence_count": 21,
-      "key_quote": "Product quality is pathetic. Fabric feels like plastic. Never ordering again."
+      "key_quote": "Product quality is pathetic. Fabric feels like plastic."
     },
     {
       "theme": "FIT_UNCERTAINTY",
@@ -2270,7 +2270,7 @@
       "conversion_impact": "Direct — blocks purchase at decision stage",
       "solveability": "High",
       "evidence_count": 20,
-      "key_quote": "Size chart is completely wrong. Ordered M but it fits like S. Very disappointed."
+      "key_quote": "Size chart is completely wrong. Ordered M but it fits like S."
     },
     {
       "theme": "TRUST_DEFICIT",
@@ -2290,7 +2290,7 @@
       "conversion_impact": "Indirect — erodes trust for future purchases",
       "solveability": "Medium",
       "evidence_count": 13,
-      "key_quote": "Return pickup took 10 days. Customer care does not respond. Worst experience."
+      "key_quote": "Return pickup took 10 days. Customer care does not respond."
     },
     {
       "theme": "FORGOTTEN_WISHLIST",
@@ -2330,7 +2330,7 @@
       "conversion_impact": "Indirect — erodes trust for future purchases",
       "solveability": "Low",
       "evidence_count": 21,
-      "key_quote": "The app crashes every time I try to open my wishlist. Fix this please."
+      "key_quote": "The app crashes every time I try to open my wishlist."
     }
   ]
 }
