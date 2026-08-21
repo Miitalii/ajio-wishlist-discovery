@@ -20,20 +20,23 @@ data = load_data()
 insights = data["insights"]
 ranking = data["opportunity_ranking"]
 
-# Custom CSS
+# Custom CSS — BRIGHT COLORS for dark mode readability
 st.markdown("""
 <style>
-    .main-header { font-size: 2.5rem; font-weight: 700; color: #1a1a2e; margin-bottom: 0.5rem; }
-    .sub-header { font-size: 1.1rem; color: #4a4a6a; margin-bottom: 2rem; }
-    .insight-card { background: #f8f9fa; border-left: 4px solid #667eea; padding: 1rem; margin-bottom: 0.8rem; border-radius: 0 8px 8px 0; }
-    .opportunity-high { border-left: 4px solid #e74c3c; }
-    .opportunity-medium { border-left: 4px solid #f39c12; }
-    .opportunity-low { border-left: 4px solid #27ae60; }
+    .main-header { font-size: 2.5rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem; text-shadow: 0 0 10px rgba(102,126,234,0.5); }
+    .sub-header { font-size: 1.1rem; color: #b0b3c7; margin-bottom: 2rem; }
+    .insight-card { background: #1e1e2f; border-left: 4px solid #667eea; padding: 1rem; margin-bottom: 0.8rem; border-radius: 0 8px 8px 0; color: #e0e0e0; }
+    .opportunity-high { border-left: 4px solid #ff6b6b; }
+    .opportunity-medium { border-left: 4px solid #feca57; }
+    .opportunity-low { border-left: 4px solid #1dd1a1; }
     .theme-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-right: 8px; }
-    .stage-badge { background: #e3f2fd; color: #1565c0; }
-    .sentiment-negative { background: #ffebee; color: #c62828; }
-    .sentiment-positive { background: #e8f5e9; color: #2e7d32; }
-    .sentiment-neutral { background: #fff3e0; color: #e65100; }
+    .stage-badge { background: #2d3561; color: #74b9ff; }
+    .sentiment-negative { background: #3d1f1f; color: #ff7675; }
+    .sentiment-positive { background: #1f3d1f; color: #55efc4; }
+    .sentiment-neutral { background: #3d331f; color: #fdcb6e; }
+    .metric-label { color: #b0b3c7; font-size: 0.9rem; }
+    .metric-value { color: #ffffff; font-size: 2rem; font-weight: 700; }
+    a { color: #74b9ff !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -51,16 +54,16 @@ view = st.sidebar.radio(
     ["📊 Executive Dashboard", "🔍 Thematic Analysis", "🏆 Opportunity Ranker", "🧪 Live Analyzer", "📖 Methodology"]
 )
 
-# Header
-st.markdown('<div class="main-header">AJIO Wishlist-to-Purchase Discovery Engine</div>', unsafe_allow_html=True)
+# Header — BRIGHT & READABLE
+st.markdown('<div class="main-header">🛍️ AJIO Wishlist-to-Purchase Discovery Engine</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-header">AI-powered analysis of user feedback to identify highest-impact conversion blockers</div>', unsafe_allow_html=True)
 
 # Helper functions
 def get_theme_color(theme):
     colors = {
-        "FIT_UNCERTAINTY": "#e74c3c", "QUALITY_DOUBT": "#e67e22", "TRUST_DEFICIT": "#9b59b6",
-        "INFO_GAP": "#3498db", "RETURN_NIGHTMARE": "#e74c3c", "APP_FRICTION": "#95a5a6",
-        "PRICE_SATISFACTION": "#27ae60", "FORGOTTEN_WISHLIST": "#8e44ad", "EXTERNAL_COMPARISON": "#16a085"
+        "FIT_UNCERTAINTY": "#ff6b6b", "QUALITY_DOUBT": "#feca57", "TRUST_DEFICIT": "#a29bfe",
+        "INFO_GAP": "#74b9ff", "RETURN_NIGHTMARE": "#ff6b6b", "APP_FRICTION": "#dfe6e9",
+        "PRICE_SATISFACTION": "#1dd1a1", "FORGOTTEN_WISHLIST": "#fd79a8", "EXTERNAL_COMPARISON": "#00cec9"
     }
     return colors.get(theme, "#667eea")
 
@@ -72,10 +75,18 @@ def get_opportunity_class(score):
 # VIEW 1: Executive Dashboard
 if view == "📊 Executive Dashboard":
     col1, col2, col3, col4 = st.columns(4)
-    with col1: st.metric("Total Data Points", len(insights))
-    with col2: st.metric("Sources Analyzed", len(set(i["source"] for i in insights)))
-    with col3: st.metric("Themes Identified", len(set(i["theme"] for i in insights)))
-    with col4: st.metric("Top Opportunity", ranking[0]["theme_label"])
+    with col1: 
+        st.markdown('<div class="metric-label">Total Data Points</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="metric-value">{len(insights)}</div>', unsafe_allow_html=True)
+    with col2: 
+        st.markdown('<div class="metric-label">Sources Analyzed</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="metric-value">{len(set(i["source"] for i in insights))}</div>', unsafe_allow_html=True)
+    with col3: 
+        st.markdown('<div class="metric-label">Themes Identified</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="metric-value">{len(set(i["theme"] for i in insights))}</div>', unsafe_allow_html=True)
+    with col4: 
+        st.markdown('<div class="metric-label">Top Opportunity</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="metric-value" style="font-size:1.3rem;">{ranking[0]["theme_label"]}</div>', unsafe_allow_html=True)
     
     st.markdown("---")
     st.subheader("🎯 Theme Distribution Across Feedback")
@@ -133,16 +144,16 @@ elif view == "🔍 Thematic Analysis":
         <div class="insight-card {opp_class}">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                 <div>
-                    <span class="theme-badge" style="background: {color}20; color: {color};">{item["theme_label"]}</span>
+                    <span class="theme-badge" style="background: {color}30; color: {color}; border: 1px solid {color}50;">{item["theme_label"]}</span>
                     <span class="theme-badge stage-badge">{item["journey_stage"]}</span>
                     <span class="theme-badge {sentiment_class}">{item["sentiment"].upper()}</span>
                 </div>
-                <div style="color: #666; font-size: 0.8rem;">{item["source"]} | Score: <b>{item.get("opportunity_score", "N/A")}</b></div>
+                <div style="color: #888; font-size: 0.8rem;">{item["source"]} | Score: <b style="color:{color};">{item.get("opportunity_score", "N/A")}</b></div>
             </div>
-            <div style="font-style: italic; color: #333; margin: 8px 0;">"{item["raw_text"]}"</div>
-            <div style="font-size: 0.85rem; color: #666;">
-                <b>Impact:</b> {item["impact_on_conversion"]} | <b>Frequency:</b> {item["frequency_score"]}/100 | 
-                <a href="{item["evidence_url"]}" target="_blank" style="color: #667eea;">View Source ↗</a>
+            <div style="font-style: italic; color: #f0f0f0; margin: 8px 0;">"{item["raw_text"]}"</div>
+            <div style="font-size: 0.85rem; color: #aaa;">
+                <b style="color:#ddd;">Impact:</b> {item["impact_on_conversion"]} | <b style="color:#ddd;">Frequency:</b> {item["frequency_score"]}/100 | 
+                <a href="{item["evidence_url"]}" target="_blank">View Source ↗</a>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -155,23 +166,23 @@ elif view == "🏆 Opportunity Ranker":
     for i, opp in enumerate(ranking):
         score = opp["score"]
         opp_class = get_opportunity_class(score)
-        badge_color = '#e74c3c' if score >= 80 else '#f39c12' if score >= 60 else '#27ae60'
+        badge_color = '#ff6b6b' if score >= 80 else '#feca57' if score >= 60 else '#1dd1a1'
         
         st.markdown(f"""
         <div class="insight-card {opp_class}">
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div style="flex: 1;">
-                    <div style="font-size: 1.3rem; font-weight: 700; color: #1a1a2e; margin-bottom: 4px;">#{i+1} {opp["theme_label"]}</div>
-                    <div style="color: #4a4a6a; margin-bottom: 8px;">
-                        <b>Score:</b> {score}/100 | <b>Evidence:</b> {opp["evidence_count"]} data points | <b>Frequency:</b> {opp["frequency"]}
+                    <div style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 4px;">#{i+1} {opp["theme_label"]}</div>
+                    <div style="color: #b0b3c7; margin-bottom: 8px;">
+                        <b style="color:#fff;">Score:</b> {score}/100 | <b style="color:#fff;">Evidence:</b> {opp["evidence_count"]} data points | <b style="color:#fff;">Frequency:</b> {opp["frequency"]}
                     </div>
-                    <div style="background: white; padding: 12px; border-radius: 8px; margin: 8px 0;">
-                        <div style="font-size: 0.9rem; color: #555; margin-bottom: 4px;"><b>💡 Conversion Impact:</b> {opp["conversion_impact"]}</div>
-                        <div style="font-size: 0.9rem; color: #555; margin-bottom: 4px;"><b>🔧 Solveability:</b> {opp["solveability"]}</div>
-                        <div style="font-size: 0.85rem; color: #666; font-style: italic;">"{opp["key_quote"]}"</div>
+                    <div style="background: #252538; padding: 12px; border-radius: 8px; margin: 8px 0; border: 1px solid #333;">
+                        <div style="font-size: 0.9rem; color: #ddd; margin-bottom: 4px;"><b style="color:#74b9ff;">💡 Conversion Impact:</b> {opp["conversion_impact"]}</div>
+                        <div style="font-size: 0.9rem; color: #ddd; margin-bottom: 4px;"><b style="color:#55efc4;">🔧 Solveability:</b> {opp["solveability"]}</div>
+                        <div style="font-size: 0.85rem; color: #aaa; font-style: italic;">"{opp["key_quote"]}"</div>
                     </div>
                 </div>
-                <div style="background: {badge_color}; color: white; padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 1.2rem; margin-left: 16px;">{score}</div>
+                <div style="background: {badge_color}; color: #1a1a2e; padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 1.2rem; margin-left: 16px;">{score}</div>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -215,13 +226,13 @@ elif view == "🧪 Live Analyzer":
             for theme_code, theme_label, score in themes_detected:
                 color = get_theme_color(theme_code)
                 st.markdown(f"""
-                <div style="background: white; border: 2px solid {color}; border-radius: 12px; padding: 16px; margin: 12px 0;">
+                <div style="background: #1e1e2f; border: 2px solid {color}; border-radius: 12px; padding: 16px; margin: 12px 0;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
                             <div style="font-size: 1.2rem; font-weight: 700; color: {color};">{theme_label}</div>
-                            <div style="color: #666; font-size: 0.9rem; margin-top: 4px;">Code: {theme_code} | Opportunity Score: {score}/100</div>
+                            <div style="color: #888; font-size: 0.9rem; margin-top: 4px;">Code: {theme_code} | Opportunity Score: {score}/100</div>
                         </div>
-                        <div style="background: {color}; color: white; padding: 8px 16px; border-radius: 20px; font-weight: 700;">{score}</div>
+                        <div style="background: {color}; color: #1a1a2e; padding: 8px 16px; border-radius: 20px; font-weight: 700;">{score}</div>
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
@@ -252,22 +263,4 @@ elif view == "📖 Methodology":
     Score = (Frequency_Score / 100) × (Impact_Weight) × (Solveability_Weight) × 100
     ```
     - **Frequency:** How often does this theme appear? (0–100)
-    - **Conversion Impact:** Does this directly block a wishlist purchase? (High=1.0, Medium=0.7, Low=0.4)
-    - **Solveability:** Can we realistically solve this with product innovation? (High=1.0, Medium=0.7, Low=0.4)
-    
-    ### Why This Matters
-    Instead of generic sentiment analysis, this engine **connects every insight to the business metric**: 
-    *"% of users who purchase at least one wishlist item within 30 days."*
-    
-    ### Limitations
-    - Sample size is directional, not statistically significant
-    - Rule-based live analyzer is a prototype; production would use fine-tuned LLM
-    - Does not include primary research data (see Part 3: User Interviews)
-    """)
-
-st.markdown("---")
-st.markdown("""
-<div style="text-align: center; color: #888; font-size: 0.8rem;">
-    AJIO Wishlist Discovery Engine | Built for PM Fellowship Graduation Project | 2026
-</div>
-""", unsafe_allow_html=True)
+    -
