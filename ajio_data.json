@@ -4,7 +4,7 @@
       "id": 1,
       "source": "Play Store",
       "source_type": "app_review",
-      "raw_text": "The app crashes every time I try to open my wishlist.",
+      "raw_text": "The app crashes every time I try to open my wishlist. Fix this please.",
       "theme": "APP_FRICTION",
       "theme_label": "App Experience Friction",
       "journey_stage": "POST_SAVE",
@@ -20,7 +20,7 @@
       "id": 2,
       "source": "Play Store",
       "source_type": "app_review",
-      "raw_text": "Size chart is completely wrong. Ordered M but it fits like S.",
+      "raw_text": "Size chart is completely wrong. Ordered M but it fits like S. Very disappointed.",
       "theme": "FIT_UNCERTAINTY",
       "theme_label": "Fit & Sizing Confidence",
       "journey_stage": "PRE_PURCHASE",
@@ -52,7 +52,7 @@
       "id": 4,
       "source": "Play Store",
       "source_type": "app_review",
-      "raw_text": "Product quality is pathetic. Fabric feels like plastic.",
+      "raw_text": "Product quality is pathetic. Fabric feels like plastic. Never ordering again.",
       "theme": "QUALITY_DOUBT",
       "theme_label": "Product Quality Mismatch",
       "journey_stage": "POST_DELIVERY",
@@ -68,7 +68,7 @@
       "id": 5,
       "source": "Play Store",
       "source_type": "app_review",
-      "raw_text": "Return pickup took 10 days. Customer care does not respond.",
+      "raw_text": "Return pickup took 10 days. Customer care does not respond. Worst experience.",
       "theme": "RETURN_NIGHTMARE",
       "theme_label": "Return & Refund Friction",
       "journey_stage": "POST_DELIVERY",
@@ -2260,7 +2260,7 @@
       "conversion_impact": "Indirect — erodes trust for future purchases",
       "solveability": "High",
       "evidence_count": 21,
-      "key_quote": "Product quality is pathetic. Fabric feels like plastic."
+      "key_quote": "Product quality is pathetic. Fabric feels like plastic. Never ordering again."
     },
     {
       "theme": "FIT_UNCERTAINTY",
@@ -2270,7 +2270,7 @@
       "conversion_impact": "Direct — blocks purchase at decision stage",
       "solveability": "High",
       "evidence_count": 20,
-      "key_quote": "Size chart is completely wrong. Ordered M but it fits like S."
+      "key_quote": "Size chart is completely wrong. Ordered M but it fits like S. Very disappointed."
     },
     {
       "theme": "TRUST_DEFICIT",
@@ -2290,7 +2290,7 @@
       "conversion_impact": "Indirect — erodes trust for future purchases",
       "solveability": "Medium",
       "evidence_count": 13,
-      "key_quote": "Return pickup took 10 days. Customer care does not respond."
+      "key_quote": "Return pickup took 10 days. Customer care does not respond. Worst experience."
     },
     {
       "theme": "FORGOTTEN_WISHLIST",
@@ -2330,7 +2330,7 @@
       "conversion_impact": "Indirect — erodes trust for future purchases",
       "solveability": "Low",
       "evidence_count": 21,
-      "key_quote": "The app crashes every time I try to open my wishlist."
+      "key_quote": "The app crashes every time I try to open my wishlist. Fix this please."
     }
   ]
 }
