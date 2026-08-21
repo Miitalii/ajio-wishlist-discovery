@@ -2,15 +2,8 @@ import streamlit as st
 import json
 from collections import Counter
 
-# Page config
-st.set_page_config(
-    page_title="AJIO Wishlist Discovery Engine",
-    page_icon="🛍️",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+st.set_page_config(page_title="AJIO Wishlist Discovery Engine", page_icon="🛍️", layout="wide")
 
-# Load data
 @st.cache_data
 def load_data():
     with open("ajio_data.json", "r") as f:
@@ -20,8 +13,7 @@ data = load_data()
 insights = data["insights"]
 ranking = data["opportunity_ranking"]
 
-# Custom CSS — BRIGHT COLORS for dark mode readability
-st.markdown("""
+st.markdown('''
 <style>
     .main-header { font-size: 2.5rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem; text-shadow: 0 0 10px rgba(102,126,234,0.5); }
     .sub-header { font-size: 1.1rem; color: #b0b3c7; margin-bottom: 2rem; }
@@ -38,27 +30,27 @@ st.markdown("""
     .metric-value { color: #ffffff; font-size: 2rem; font-weight: 700; }
     a { color: #74b9ff !important; }
 </style>
-""", unsafe_allow_html=True)
+''', unsafe_allow_html=True)
 
-# Sidebar
 st.sidebar.title("🛍️ AJIO Discovery")
 st.sidebar.markdown("---")
-st.sidebar.markdown("""
+st.sidebar.markdown('''
 **Goal:** Increase % of users who purchase at least 1 wishlist item within 30 days.
 
 **Approach:** AI-powered analysis of public user feedback mapped to the wishlist-to-purchase journey.
-""")
+''')
 
-view = st.sidebar.radio(
-    "Select View",
-    ["📊 Executive Dashboard", "🔍 Thematic Analysis", "🏆 Opportunity Ranker", "🧪 Live Analyzer", "📖 Methodology"]
-)
+view = st.sidebar.radio("Select View", [
+    "📊 Executive Dashboard",
+    "🔍 Thematic Analysis",
+    "🏆 Opportunity Ranker",
+    "🧪 Live Analyzer",
+    "📖 Methodology"
+])
 
-# Header — BRIGHT & READABLE
 st.markdown('<div class="main-header">🛍️ AJIO Wishlist-to-Purchase Discovery Engine</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-header">AI-powered analysis of user feedback to identify highest-impact conversion blockers</div>', unsafe_allow_html=True)
 
-# Helper functions
 def get_theme_color(theme):
     colors = {
         "FIT_UNCERTAINTY": "#ff6b6b", "QUALITY_DOUBT": "#feca57", "TRUST_DEFICIT": "#a29bfe",
@@ -67,86 +59,78 @@ def get_theme_color(theme):
     }
     return colors.get(theme, "#667eea")
 
-def get_opportunity_class(score):
+def get_opp_class(score):
     if score >= 80: return "opportunity-high"
     elif score >= 60: return "opportunity-medium"
     else: return "opportunity-low"
 
-# VIEW 1: Executive Dashboard
 if view == "📊 Executive Dashboard":
-    col1, col2, col3, col4 = st.columns(4)
-    with col1: 
+    c1, c2, c3, c4 = st.columns(4)
+    with c1: 
         st.markdown('<div class="metric-label">Total Data Points</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="metric-value">{len(insights)}</div>', unsafe_allow_html=True)
-    with col2: 
+    with c2: 
         st.markdown('<div class="metric-label">Sources Analyzed</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="metric-value">{len(set(i["source"] for i in insights))}</div>', unsafe_allow_html=True)
-    with col3: 
+    with c3: 
         st.markdown('<div class="metric-label">Themes Identified</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="metric-value">{len(set(i["theme"] for i in insights))}</div>', unsafe_allow_html=True)
-    with col4: 
+    with c4: 
         st.markdown('<div class="metric-label">Top Opportunity</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="metric-value" style="font-size:1.3rem;">{ranking[0]["theme_label"]}</div>', unsafe_allow_html=True)
     
     st.markdown("---")
     st.subheader("🎯 Theme Distribution Across Feedback")
-    
     theme_counts = Counter([i["theme_label"] for i in insights])
     st.bar_chart(dict(theme_counts))
     
     st.markdown("---")
     st.subheader("🛤️ Where in the Wishlist Journey Do Problems Occur?")
-    
     journey_counts = Counter([i["journey_label"] for i in insights])
     st.bar_chart(dict(journey_counts))
     
-    st.info("""
+    st.info('''
     **How to read this:** `PRE_PURCHASE` issues are direct conversion blockers — users are actively considering 
     a wishlist item but something stops them. `POST_DELIVERY` issues are trust eroders — they make users 
     hesitant to buy from their wishlist in the future.
-    """)
+    ''')
     
     st.markdown("---")
     st.subheader("📡 Feedback Sources")
     source_counts = Counter([i["source"] for i in insights])
-    col_s1, col_s2 = st.columns([2, 1])
-    with col_s1: st.bar_chart(dict(source_counts))
-    with col_s2:
+    cs1, cs2 = st.columns([2, 1])
+    with cs1: st.bar_chart(dict(source_counts))
+    with cs2:
         for src, cnt in source_counts.items():
             st.write(f"**{src}:** {cnt}")
 
-# VIEW 2: Thematic Analysis
 elif view == "🔍 Thematic Analysis":
     st.subheader("🔍 Deep Dive: Feedback Themes")
-    
-    col_f1, col_f2, col_f3 = st.columns(3)
-    with col_f1:
-        selected_theme = st.selectbox("Filter by Theme", ["All"] + sorted(list(set(i["theme_label"] for i in insights))))
-    with col_f2:
-        selected_stage = st.selectbox("Filter by Journey Stage", ["All"] + sorted(list(set(i["journey_label"] for i in insights))))
-    with col_f3:
-        selected_source = st.selectbox("Filter by Source", ["All"] + sorted(list(set(i["source"] for i in insights))))
+    f1, f2, f3 = st.columns(3)
+    with f1: sel_theme = st.selectbox("Filter by Theme", ["All"] + sorted(list(set(i["theme_label"] for i in insights))))
+    with f2: sel_stage = st.selectbox("Filter by Journey Stage", ["All"] + sorted(list(set(i["journey_label"] for i in insights))))
+    with f3: sel_source = st.selectbox("Filter by Source", ["All"] + sorted(list(set(i["source"] for i in insights))))
     
     filtered = insights
-    if selected_theme != "All": filtered = [i for i in filtered if i["theme_label"] == selected_theme]
-    if selected_stage != "All": filtered = [i for i in filtered if i["journey_label"] == selected_stage]
-    if selected_source != "All": filtered = [i for i in filtered if i["source"] == selected_source]
+    if sel_theme != "All": filtered = [i for i in filtered if i["theme_label"] == sel_theme]
+    if sel_stage != "All": filtered = [i for i in filtered if i["journey_label"] == sel_stage]
+    if sel_source != "All": filtered = [i for i in filtered if i["source"] == sel_source]
     
     st.markdown(f"**Showing {len(filtered)} insights**")
     
     for item in filtered:
         color = get_theme_color(item["theme"])
-        opp_class = get_opportunity_class(item.get("opportunity_score", 50))
-        sentiment_map = {"negative": "sentiment-negative", "positive": "sentiment-positive", "neutral": "sentiment-neutral"}
-        sentiment_class = sentiment_map.get(item["sentiment"], "sentiment-neutral")
+        opp_class = get_opp_class(item.get("opportunity_score", 50))
+        smap = {"negative": "sentiment-negative", "positive": "sentiment-positive", "neutral": "sentiment-neutral"}
+        sclass = smap.get(item["sentiment"], "sentiment-neutral")
         
-        st.markdown(f"""
+        card_html = f'''
         <div class="insight-card {opp_class}">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                 <div>
                     <span class="theme-badge" style="background: {color}30; color: {color}; border: 1px solid {color}50;">{item["theme_label"]}</span>
                     <span class="theme-badge stage-badge">{item["journey_stage"]}</span>
-                    <span class="theme-badge {sentiment_class}">{item["sentiment"].upper()}</span>
+                    <span class="theme-badge {sclass}">{item["sentiment"].upper()}</span>
                 </div>
                 <div style="color: #888; font-size: 0.8rem;">{item["source"]} | Score: <b style="color:{color};">{item.get("opportunity_score", "N/A")}</b></div>
             </div>
@@ -156,19 +140,19 @@ elif view == "🔍 Thematic Analysis":
                 <a href="{item["evidence_url"]}" target="_blank">View Source ↗</a>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        '''
+        st.markdown(card_html, unsafe_allow_html=True)
 
-# VIEW 3: Opportunity Ranker
 elif view == "🏆 Opportunity Ranker":
     st.subheader("🏆 Ranked Opportunities for Wishlist Conversion")
     st.markdown("Scored by: **Frequency × Conversion Impact × Solveability**")
     
     for i, opp in enumerate(ranking):
         score = opp["score"]
-        opp_class = get_opportunity_class(score)
+        opp_class = get_opp_class(score)
         badge_color = '#ff6b6b' if score >= 80 else '#feca57' if score >= 60 else '#1dd1a1'
         
-        st.markdown(f"""
+        rank_html = f'''
         <div class="insight-card {opp_class}">
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div style="flex: 1;">
@@ -185,9 +169,9 @@ elif view == "🏆 Opportunity Ranker":
                 <div style="background: {badge_color}; color: #1a1a2e; padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 1.2rem; margin-left: 16px;">{score}</div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        '''
+        st.markdown(rank_html, unsafe_allow_html=True)
 
-# VIEW 4: Live Analyzer
 elif view == "🧪 Live Analyzer":
     st.subheader("🧪 Live Feedback Analyzer")
     st.markdown("Paste any AJIO review, Reddit post, or user comment. The AI will categorize it against our wishlist conversion framework.")
@@ -225,7 +209,7 @@ elif view == "🧪 Live Analyzer":
             st.success("Analysis Complete!")
             for theme_code, theme_label, score in themes_detected:
                 color = get_theme_color(theme_code)
-                st.markdown(f"""
+                result_html = f'''
                 <div style="background: #1e1e2f; border: 2px solid {color}; border-radius: 12px; padding: 16px; margin: 12px 0;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
@@ -235,16 +219,18 @@ elif view == "🧪 Live Analyzer":
                         <div style="background: {color}; color: #1a1a2e; padding: 8px 16px; border-radius: 20px; font-weight: 700;">{score}</div>
                     </div>
                 </div>
-                """, unsafe_allow_html=True)
+                '''
+                st.markdown(result_html, unsafe_allow_html=True)
             
-            st.info("**Note:** This demo uses rule-based classification. In the full version, this would call an LLM (GPT-4/Claude) for nuanced semantic analysis.")
+            st.info('''
+            **Note:** This demo uses rule-based classification. In the full version, this would call an LLM (GPT-4/Claude) for nuanced semantic analysis.
+            ''')
         else:
             st.warning("Please paste some feedback to analyze.")
 
-# VIEW 5: Methodology
 elif view == "📖 Methodology":
     st.subheader("📖 How This Engine Works")
-    st.markdown("""
+    st.markdown('''
     ### Data Sources
     - **Trustpilot** — Aggregated user reviews (2025–2026)
     - **Reddit** — r/IndianFashionAddicts, r/mumbai, r/India
@@ -263,4 +249,22 @@ elif view == "📖 Methodology":
     Score = (Frequency_Score / 100) × (Impact_Weight) × (Solveability_Weight) × 100
     ```
     - **Frequency:** How often does this theme appear? (0–100)
-    -
+    - **Conversion Impact:** Does this directly block a wishlist purchase? (High=1.0, Medium=0.7, Low=0.4)
+    - **Solveability:** Can we realistically solve this with product innovation? (High=1.0, Medium=0.7, Low=0.4)
+    
+    ### Why This Matters
+    Instead of generic sentiment analysis, this engine **connects every insight to the business metric**: 
+    *"% of users who purchase at least one wishlist item within 30 days."*
+    
+    ### Limitations
+    - Sample size is directional, not statistically significant
+    - Rule-based live analyzer is a prototype; production would use fine-tuned LLM
+    - Does not include primary research data (see Part 3: User Interviews)
+    ''')
+
+st.markdown("---")
+st.markdown('''
+<div style="text-align: center; color: #666; font-size: 0.8rem;">
+    AJIO Wishlist Discovery Engine | Built for PM Fellowship Graduation Project | 2026
+</div>
+''', unsafe_allow_html=True)
